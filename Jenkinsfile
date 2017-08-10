@@ -1,4 +1,4 @@
-node('linux:staging'){
+node{
     stage('Preperations'){
         git credentialsId: 'ubuntu', url: 'git@github.com:mibsen/ca-project.git'
         sh 'make build'
