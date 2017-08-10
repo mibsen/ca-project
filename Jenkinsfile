@@ -1,4 +1,4 @@
-node{
+node('linux:staging'){
     stage('Preperations'){
         git credentialsId: 'ubuntu', url: 'git@github.com:mibsen/ca-project.git'
         sh 'make build'
@@ -12,7 +12,10 @@ node{
         sh 'make BUILD_NUMBER=$BUILD_NUMBER staging'
     }
     stage('Functional test'){
-        sh 'curl http://52.59.57.105:6892/'
+        retry(2){
+            sleep 5 SECONDS
+            sh 'curl http://52.59.57.105:6892/'
+        }
     }
     stage('Deploy to Production'){
         sh 'make BUILD_NUMBER=$BUILD_NUMBER production'
