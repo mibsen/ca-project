@@ -13,8 +13,7 @@ node{
     }
     stage('Functional test'){
         retry(2){
-            sleep 5 SECONDS
-            sh 'curl http://52.59.57.105:6892/'
+            sh 'sleep 5;curl http://52.59.57.105:6892/'
         }
     }
     stage('Deploy to Production'){
