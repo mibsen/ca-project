@@ -7,7 +7,7 @@ node{
     stage('Run test'){
         sh 'docker run codechan python tests.py'
     }
-    stage(‘Deploy to Stage’){
-        sh ‘make staging’
+    stage('Deploy to Stage'){
+        sh 'make staging'
     }
 }
