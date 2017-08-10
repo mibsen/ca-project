@@ -1,13 +1,14 @@
 node{
     stage('Preperations'){
         git credentialsId: 'ubuntu', url: 'git@github.com:mibsen/ca-project.git'
-        sh 'docker build -t codechan .'
+        sh 'make build'
+        sh 'make tag'
 
     }
     stage('Run test'){
-        sh 'docker run codechan python tests.py'
+        sh 'docker run ca-project python tests.py'
     }
     stage('Deploy to Stage'){
-        sh 'make staging'
+        sh 'make BUILD_NUMBER=$BUILD_NUMBER staging'
     }
 }
