@@ -8,7 +8,13 @@ node{
     stage('Run test'){
         sh 'docker run ca-project python tests.py'
     }
-    stage('Deploy to Stage'){
+    stage('Deploy to Staging'){
         sh 'make BUILD_NUMBER=$BUILD_NUMBER staging'
+    }
+    stage('Functional test'){
+        sh 'curl http://52.59.57.105:6892/'
+    }
+    stage('Deploy to Production'){
+        sh 'make BUILD_NUMBER=$BUILD_NUMBER production'
     }
 }
